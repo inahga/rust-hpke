@@ -12,7 +12,7 @@
 //! BLINDLY**. Think about what you actually need, make that instead, and make sure to write lots
 //! of runtime checks.
 
-use hpke::{
+use hpke_pq::{
     aead::{Aead, AeadCtxR, AeadCtxS, AeadTag, AesGcm128, AesGcm256, ChaCha20Poly1305},
     kdf::{HkdfSha256, HkdfSha384, HkdfSha512, Kdf as KdfTrait},
     kem::{DhP256HkdfSha256, DhP384HkdfSha384, Kem as KemTrait, X25519HkdfSha256},

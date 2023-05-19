@@ -11,7 +11,7 @@
 //! # #[cfg(feature = "x25519")]
 //! # {
 //! # use rand::{rngs::StdRng, SeedableRng};
-//! # use hpke::{
+//! # use hpke_pq::{
 //! #     aead::ChaCha20Poly1305,
 //! #     kdf::HkdfSha384,
 //! #     kem::X25519HkdfSha256,
@@ -34,7 +34,7 @@
 //! // knew, she'd be able to authenticate herself. See the OpModeS and OpModeR types for more
 //! // detail.
 //! let (encapsulated_key, mut encryption_context) =
-//!     hpke::setup_sender::<Aead, Kdf, Kem, _>(&OpModeS::Base, &bob_pk, info_str, &mut csprng)
+//!     hpke_pq::setup_sender::<Aead, Kdf, Kem, _>(&OpModeS::Base, &bob_pk, info_str, &mut csprng)
 //!         .expect("invalid server pubkey!");
 //!
 //! // Alice encrypts a message to Bob. `aad` is authenticated associated data that is not
@@ -54,7 +54,7 @@
 //!
 //! // Somewhere far away, Bob receives the data and makes a decryption session
 //! let mut decryption_context =
-//!     hpke::setup_receiver::<Aead, Kdf, Kem>(
+//!     hpke_pq::setup_receiver::<Aead, Kdf, Kem>(
 //!         &OpModeR::Base,
 //!         &bob_sk,
 //!         &encapsulated_key,

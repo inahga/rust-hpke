@@ -1,11 +1,11 @@
 [package]
-name = "hpke"
-repository = "https://github.com/rozbb/rust-hpke"
+name = "hpke_pq"
+repository = "https://github.com/bwesterb/rust-hpke"
 documentation = "https://docs.rs/rust-hpke"
-description = "An implementation of the HPKE hybrid encryption standard (RFC 9180) in pure Rust"
+description = "Fork of hpke that adds PQ modes"
 readme = "README.md"
 version = "0.10.0"
-authors = ["Michael Rosenberg <michael@mrosenberg.pub>"]
+authors = ["Bas Westerbaan <bas@westerbaan.name>"]
 edition = "2021"
 license = "MIT/Apache-2.0"
 keywords = ["cryptography", "crypto", "key-exchange", "encryption", "aead"]

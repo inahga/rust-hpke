@@ -1,4 +1,4 @@
-use hpke::{
+use hpke_pq::{
     aead::{Aead as AeadTrait, AeadCtxR, AeadTag},
     kdf::Kdf as KdfTrait,
     kem::Kem as KemTrait,
@@ -212,7 +212,7 @@ pub fn benches() {
 
     // NIST ciphersuite at the 128-bit security level is AES-GCM-128, HKDF-SHA256, and ECDH-P256
     #[cfg(feature = "p256")]
-    bench_ciphersuite::<hpke::aead::AesGcm128, hpke::kdf::HkdfSha256, hpke::kem::DhP256HkdfSha256>(
+    bench_ciphersuite::<hpke_pq::aead::AesGcm128, hpke_pq::kdf::HkdfSha256, hpke_pq::kem::DhP256HkdfSha256>(
         "NIST[seclevel=128]",
         &mut c,
     );
@@ -220,9 +220,9 @@ pub fn benches() {
     // Non-NIST ciphersuite at the 128-bit security level is ChaCha20Poly1305, HKDF-SHA256, and X25519
     #[cfg(feature = "x25519")]
     bench_ciphersuite::<
-        hpke::aead::ChaCha20Poly1305,
-        hpke::kdf::HkdfSha256,
-        hpke::kem::X25519HkdfSha256,
+        hpke_pq::aead::ChaCha20Poly1305,
+        hpke_pq::kdf::HkdfSha256,
+        hpke_pq::kem::X25519HkdfSha256,
     >("Non-NIST[seclevel=128]", &mut c);
 }
 
