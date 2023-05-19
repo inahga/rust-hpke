@@ -94,13 +94,13 @@ impl Deserializable for PrivateKey {
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub struct PublicKey {
     x: <X25519HkdfSha256 as KemTrait>::PublicKey,
-    k: pqc_kyber::PublicKey,
+    k: safe_pqc_kyber::PublicKey,
 }
 
 #[derive(Clone)]
 pub struct PrivateKey {
     x: <X25519HkdfSha256 as KemTrait>::PrivateKey,
-    k: pqc_kyber::SecretKey,
+    k: safe_pqc_kyber::SecretKey,
 }
 
 #[derive(Clone)]
@@ -144,7 +144,7 @@ impl KemTrait for X25519Kyber768Draft00 {
             .labeled_expand(&suite_id, b"sk", &[], &mut buf)
             .unwrap();
         let (skx, pkx) = X25519HkdfSha256::derive_keypair(&buf[..32]);
-        let kpk = pqc_kyber::derive(&buf[32..]).unwrap();
+        let kpk = safe_pqc_kyber::derive(&buf[32..]).unwrap();
         (
             PrivateKey {
                 x: skx,
@@ -160,7 +160,7 @@ impl KemTrait for X25519Kyber768Draft00 {
     fn sk_to_pk(sk: &PrivateKey) -> PublicKey {
         PublicKey {
             x: X25519HkdfSha256::sk_to_pk(&sk.x),
-            k: pqc_kyber::public(&sk.k),
+            k: safe_pqc_kyber::public(&sk.k),
         }
     }
 
@@ -174,7 +174,7 @@ impl KemTrait for X25519Kyber768Draft00 {
         }
 
         let (ss1, enc1) = X25519HkdfSha256::encap(&pk_recip.x, None, csprng)?;
-        let (enc2, ss2) = match pqc_kyber::encapsulate(&pk_recip.k, csprng) {
+        let (enc2, ss2) = match safe_pqc_kyber::encapsulate(&pk_recip.k, csprng) {
             Ok(res) => res,
             Err(_e) => return Err(HpkeError::EncapError),
         };
@@ -196,7 +196,7 @@ impl KemTrait for X25519Kyber768Draft00 {
         }
 
         let ss1 = X25519HkdfSha256::decap(&sk_recip.x, None, &encapped_key.x)?;
-        let ss2 = match pqc_kyber::decapsulate(&encapped_key.k, &sk_recip.k) {
+        let ss2 = match safe_pqc_kyber::decapsulate(&encapped_key.k, &sk_recip.k) {
             Ok(ss) => ss,
             Err(_e) => return Err(HpkeError::DecapError),
         };
