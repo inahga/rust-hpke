@@ -1,10 +1,12 @@
-rust-hpke
+hpke_pq - a fork of [hpke](https://github.com/rozbb/rust-hpke)
 =========
 [![Version](https://img.shields.io/crates/v/hpke.svg)](https://crates.io/crates/hpke)
 [![Docs](https://docs.rs/hpke/badge.svg)](https://docs.rs/hpke)
 [![CI](https://github.com/rozbb/rust-hpke/workflows/CI/badge.svg)](https://github.com/rozbb/rust-hpke/actions)
 
 This is an implementation of the [HPKE](https://www.rfc-editor.org/rfc/rfc9180.html) hybrid encryption standard (RFC 9180).
+
+This fork includes experimental support for the hybrid [Kyber-X25519 KEM](https://github.com/bwesterb/draft-westerbaan-cfrg-hpke-xyber768d00).
 
 Warning
 -------
